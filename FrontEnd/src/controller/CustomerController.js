@@ -35,6 +35,7 @@ function loadAllCustomers() {
                 let row = `<tr><td>${customer.cusId}</td><td>${customer.cusName}</td><td>${customer.cusAddress}</td><td>${customer.city}</td><td>${customer.province}</td><td>${customer.postalCode}</td></tr>`;
                 $("#customerTable").append(row);
                 bindClickEvents();
+
             }
         },
         error: function (ob) {

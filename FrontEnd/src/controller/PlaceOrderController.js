@@ -1,7 +1,10 @@
 loadAllCustomerIds();
-loadAllItemIds();
+//loadAllItemIds();
 
 var itemDetailsArray = [];
+
+
+var baseUrl2 = "http://localhost:8080/BackEnd_war/placeOrder";
 
 function loadAllItemIds(){
     $("#cmbItemIds").empty();
@@ -11,13 +14,24 @@ function loadAllItemIds(){
     }
 }
 
-function loadAllCustomerIds(){
-    $("#customerId").empty();
 
-    for (const customer of customerArray) {
-        let option = `<option value="${customer.id}">${customer.id}</option>`;
-        $("#customerId").append(option);
-    }
+function loadAllCustomerIds(){
+
+    $.ajax({
+        url: baseUrl2 + "/ids",
+        method: "GET",
+        success: function (response) {
+            $("#customerId").empty();
+            for (const id of response.data) {
+                let option = `<option value="${id}">${id}</option>`;
+                $("#customerId").append(option);
+            }
+        },
+        error:function (ob){
+            console.log(ob);
+            alert(ob.responseJSON.message);
+        }
+    });
 }
 
 function clearPlaceOrderFields(){
@@ -37,7 +51,7 @@ function clearPlaceOrderFields(){
 
 function placeOrder(){
 
-    var order={
+    /*var order={
         orderId:$("#orderId").val(),
         customerId:$("#customerId1").val(),
         orderDate:$("#oDate").val(),
@@ -65,7 +79,7 @@ function placeOrder(){
             console.log(statusText);
             console.log(error);
         }
-    });
+    });*/
 
 }
 
@@ -74,12 +88,12 @@ $("#customerId").on("change",function(){
         let cusId = $(this).find('option:selected').text();
 
         $.ajax({
-            url: "http://localhost:8080/backend/order?option=getCustomer&id=" + cusId,
+            url: baseUrl2 + "/" + cusId,
             method: "GET",
             success: function (response) {
 
                 $("#customerId1").val(cusId);
-                $("#customerName").val(response.name);
+                $("#customerName").val(response.data.cusName);
             },
             error: function (ob, statusText, error) {
                 alert("No Such Customer");
@@ -90,7 +104,7 @@ $("#customerId").on("change",function(){
 
 $("#cmbItemIds").on("change",function(){
 
-    let itemId = $(this).find('option:selected').text();
+    /*let itemId = $(this).find('option:selected').text();
 
     $.ajax({
         url: "http://localhost:8080/backend/order?option=getItem&id=" + itemId,
@@ -106,48 +120,48 @@ $("#cmbItemIds").on("change",function(){
             alert("No Such Customer");
             loadAllCustomers();
         }
-    });
+    });*/
 });
 
 function searchOrder() {
-    let id = $("#txtSearchOrder").val();
-
-    $.ajax({
-        url: "http://localhost:8080/backend/order?option=searchOrder&id=" + id,
-        method: "GET",
-        success: function (resp) {
-            $("#oDate").val(resp.orderDate);
-            $("#netAmount").val(resp.netTotal);
-            $("#grossAmount").val(resp.total);
-            $("#customerId").val(resp.customerId);
-            $("#customerId").trigger("change");
-
-            let i = 0;
-            console.log(resp.items)
-            for (let orderItem of resp.items) {
-
-                $.ajax({
-                    url: "http://localhost:8080/backend/order?option=getItem&id=" + orderItem.itemCode,
-                    method: "GET",
-                    success: function (response) {
-                        i++;
-                        let total = parseFloat(response.unitPrice) * parseInt(orderItem.cusQty);
-                        itemDetailsArray.push(new ItemDetails(orderItem.itemCode,orderItem.orderId, response.description, orderItem.cusQty, orderItem.unitPrice, total))
-
-                        if (resp.items.length == i) {
-                            loadTable();
-                        }
-                    },
-                    error: function (ob, statusText, error) {
-                    }
-                });
-
-            }
-        },
-        error: function (ob, statusText, error) {
-            alert("There is no Order with this Id");
-        }
-    });
+    // let id = $("#txtSearchOrder").val();
+    //
+    // $.ajax({
+    //     url: "http://localhost:8080/backend/order?option=searchOrder&id=" + id,
+    //     method: "GET",
+    //     success: function (resp) {
+    //         $("#oDate").val(resp.orderDate);
+    //         $("#netAmount").val(resp.netTotal);
+    //         $("#grossAmount").val(resp.total);
+    //         $("#customerId").val(resp.customerId);
+    //         $("#customerId").trigger("change");
+    //
+    //         let i = 0;
+    //         console.log(resp.items)
+    //         for (let orderItem of resp.items) {
+    //
+    //             $.ajax({
+    //                 url: "http://localhost:8080/backend/order?option=getItem&id=" + orderItem.itemCode,
+    //                 method: "GET",
+    //                 success: function (response) {
+    //                     i++;
+    //                     let total = parseFloat(response.unitPrice) * parseInt(orderItem.cusQty);
+    //                     itemDetailsArray.push(new ItemDetails(orderItem.itemCode,orderItem.orderId, response.description, orderItem.cusQty, orderItem.unitPrice, total))
+    //
+    //                     if (resp.items.length == i) {
+    //                         loadTable();
+    //                     }
+    //                 },
+    //                 error: function (ob, statusText, error) {
+    //                 }
+    //             });
+    //
+    //         }
+    //     },
+    //     error: function (ob, statusText, error) {
+    //         alert("There is no Order with this Id");
+    //     }
+    // });
 }
 
 
@@ -172,7 +186,7 @@ function setGrossAmount(){
 }
 
 function addToCart(){
-    let itemId = $("#itemId").val();
+   /* let itemId = $("#itemId").val();
     let orderId = $("#orderId").val();
     let description = $("#description").val();
     let cusQTY = $("#custQTY").val();
@@ -216,7 +230,7 @@ function addToCart(){
     loadTable();
     setGrossAmount();
     setNetAmount();
-    $("#btnPlaceOrder").attr('disabled',true);
+    $("#btnPlaceOrder").attr('disabled',true);*/
 }
 
 function loadTable(){
