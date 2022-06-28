@@ -9,10 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="452297a5-bf7b-4784-a013-2fdfc65c7a3f" name="Default Changelist" comment="'Updated'">
+    <list default="true" id="452297a5-bf7b-4784-a013-2fdfc65c7a3f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/spring/service/impl/CustomerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/spring/service/impl/CustomerServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/controller/CustomerController.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/controller/CustomerController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/controller/PlaceOrderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/controller/PlaceOrderController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/index.html" afterDir="false" />
     </list>
@@ -54,17 +52,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Tomcat 8.5.78" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.78" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/BackEnd_war/" />
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -166,7 +153,8 @@
       <workItem from="1656043777532" duration="3141000" />
       <workItem from="1656235479264" duration="25630000" />
       <workItem from="1656306099674" duration="9293000" />
-      <workItem from="1656335925647" duration="10971000" />
+      <workItem from="1656335925647" duration="11412000" />
+      <workItem from="1656400567894" duration="2365000" />
     </task>
     <task id="LOCAL-00001" summary="'Complete customer and item CRUD operation'">
       <created>1656327936881</created>
@@ -175,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656327936881</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="'Updated'">
+      <created>1656355846259</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1656355846259</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

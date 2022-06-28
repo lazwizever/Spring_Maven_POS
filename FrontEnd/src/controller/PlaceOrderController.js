@@ -1,5 +1,5 @@
 loadAllCustomerIds();
-//loadAllItemIds();
+loadAllItemIds();
 
 var itemDetailsArray = [];
 
@@ -7,11 +7,24 @@ var itemDetailsArray = [];
 var baseUrl2 = "http://localhost:8080/BackEnd_war/placeOrder";
 
 function loadAllItemIds(){
-    $("#cmbItemIds").empty();
+    $.ajax({
+        url: baseUrl2 + "/itemId",
+        method: "GET",
+        success: function (response) {
+            $("#cmbItemIds").empty();
 
-    for (const item of itemArray) {
-        $("#cmbItemIds").append(new Option(item.id));
-    }
+            for (const id of response.data) {
+                $("#cmbItemIds").append(new Option(id));
+            }
+        },
+        error:function (ob){
+            console.log(ob);
+            alert(ob.responseJSON.message);
+        }
+    });
+
+
+
 }
 
 
@@ -104,23 +117,23 @@ $("#customerId").on("change",function(){
 
 $("#cmbItemIds").on("change",function(){
 
-    /*let itemId = $(this).find('option:selected').text();
+    let itemId = $(this).find('option:selected').text();
 
     $.ajax({
-        url: "http://localhost:8080/backend/order?option=getItem&id=" + itemId,
+        url: baseUrl2 + "?id=" + itemId,
         method: "GET",
         success: function (response) {
             $("#itemId").val(itemId);
-            $("#description").val(response.description);
-            $("#unitPrices").val(response.unitPrice);
-            $("#qTY").val(response.qtyOnHand);
+            $("#description").val(response.data.description);
+            $("#unitPrices").val(response.data.unitPrice);
+            $("#qTY").val(response.data.inputQTY);
 
         },
-        error: function (ob, statusText, error) {
-            alert("No Such Customer");
-            loadAllCustomers();
+        error:function (ob){
+            console.log(ob);
+            alert(ob.responseJSON.message);
         }
-    });*/
+    });
 });
 
 function searchOrder() {
@@ -186,7 +199,7 @@ function setGrossAmount(){
 }
 
 function addToCart(){
-   /* let itemId = $("#itemId").val();
+    let itemId = $("#itemId").val();
     let orderId = $("#orderId").val();
     let description = $("#description").val();
     let cusQTY = $("#custQTY").val();
@@ -230,7 +243,7 @@ function addToCart(){
     loadTable();
     setGrossAmount();
     setNetAmount();
-    $("#btnPlaceOrder").attr('disabled',true);*/
+    $("#btnPlaceOrder").attr('disabled',true);
 }
 
 function loadTable(){
