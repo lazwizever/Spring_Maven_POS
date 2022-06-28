@@ -13,7 +13,7 @@ function saveItem(){
         data: data,
         success: function (res) {
             if (res.code == 200) {
-                alert("Successfully Item Registered");
+                alert("Item has been successfully added");
                 loadAllItems();
             }
         },

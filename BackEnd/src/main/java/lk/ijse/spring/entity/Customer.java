@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,5 +22,9 @@ public class Customer {
     private String city;
     private String province;
     private int postalCode;
+
+    @OneToMany(mappedBy = "customer")
+    private
+    List<Orders> orderList = new ArrayList<>();
 
 }

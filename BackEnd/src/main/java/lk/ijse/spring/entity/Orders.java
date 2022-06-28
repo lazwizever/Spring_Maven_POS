@@ -7,23 +7,26 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
 @Entity
-public class Item {
+public class Orders {
     @Id
-    private String itemId;
-    private String description;
-    private String packSize;
-    private double unitPrice;
-    private int inputQTY;
+    private String orderId;
+    private String cusId;
+    private String orderDate;
+    private double total;
 
-    @ManyToMany(mappedBy = "orderItemList")
-    List<Item> itemList = new ArrayList<>();
+    @ManyToOne
+    private Customer customer;
 
+    @ManyToMany
+    private
+    List<Orders> orderItemList = new ArrayList<>();
 }

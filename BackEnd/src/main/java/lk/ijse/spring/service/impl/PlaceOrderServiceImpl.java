@@ -2,10 +2,13 @@ package lk.ijse.spring.service.impl;
 
 import lk.ijse.spring.dto.CustomerDTO;
 import lk.ijse.spring.dto.ItemDTO;
+import lk.ijse.spring.dto.OrderDTO;
 import lk.ijse.spring.entity.Customer;
 import lk.ijse.spring.entity.Item;
+import lk.ijse.spring.entity.Orders;
 import lk.ijse.spring.repo.CustomerRepo;
 import lk.ijse.spring.repo.ItemRepo;
+import lk.ijse.spring.repo.OrderRepo;
 import lk.ijse.spring.service.PlaceOrderService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -26,6 +29,9 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
 
     @Autowired
     ItemRepo itemRepo;
+
+    @Autowired
+    OrderRepo orderRepo;
 
 
     @Autowired
@@ -61,6 +67,16 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
             itemIds.add(temp.getItemId());
         }
         return itemIds;
+    }
+
+    @Override
+    public void saveOrder(OrderDTO orderDTO) {
+        if (!orderRepo.existsById(orderDTO.getOrderId())){
+            orderRepo.save(modelMapper.map(orderDTO, Orders.class));
+        }else {
+            throw new RuntimeException("Order already exist");
+        }
+
     }
 
 }

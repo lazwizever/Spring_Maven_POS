@@ -64,35 +64,30 @@ function clearPlaceOrderFields(){
 
 function placeOrder(){
 
-    /*var order={
+    var order={
         orderId:$("#orderId").val(),
-        customerId:$("#customerId1").val(),
+        cusId:$("#customerId1").val(),
         orderDate:$("#oDate").val(),
-        netTotal:$("#netAmount").val(),
-        items:itemDetailsArray
+        total:$("#netAmount").val(),
+        orderItemList:itemDetailsArray
     }
 
     $.ajax({
-        url:"http://localhost:8080/backend/order",
+        url:baseUrl2,
         method:"POST",
         contentType:"application/json",
         data: JSON.stringify(order),
         success:function (response) {
-            if (response.status == 200){
+            if (response.code == 200){
                     alert(response.message);
                     loadAllItems();
-                }else if (response.message == "Error"){
-                    alert(response.data);
-            }else if (response.status == "400"){
-                alert(response.data);
             }
         },
-        error:function (ob , statusText , error) {
-            alert(statusText);
-            console.log(statusText);
-            console.log(error);
+        error:function (ob){
+            console.log(ob);
+            alert(ob.responseJSON.message);
         }
-    });*/
+    });
 
 }
 
