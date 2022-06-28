@@ -1,5 +1,6 @@
 package lk.ijse.spring.dto;
 
+import lk.ijse.spring.entity.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,6 @@ public class OrderDTO {
     private String orderId;
     private String cusId;
     private String orderDate;
-    private ArrayList<OrderDetailsDTO> orderDetail;
+    private double total;
+    private ArrayList<OrderDetailsDTO> itemList;
 }

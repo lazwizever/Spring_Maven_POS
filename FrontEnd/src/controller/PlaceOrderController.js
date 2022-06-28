@@ -63,14 +63,28 @@ function clearPlaceOrderFields(){
 }
 
 function placeOrder(){
+var ordersDetailsArray = [];
+
+    for (let i = 0; i < itemDetailsArray.length; i++) {
+        var itemDetails = {
+            orderId :itemDetailsArray[i].getOrderId(),
+            itemCode:itemDetailsArray[i].getOrderItemCode(),
+            orderQty:itemDetailsArray[i].getOrderCustomerQTY(),
+            total:itemDetailsArray[i].getItemTotal()
+        }
+
+        ordersDetailsArray[i] = itemDetails;
+
+    }
 
     var order={
         orderId:$("#orderId").val(),
         cusId:$("#customerId1").val(),
         orderDate:$("#oDate").val(),
         total:$("#netAmount").val(),
-        orderItemList:itemDetailsArray
+        itemList:ordersDetailsArray
     }
+
 
     $.ajax({
         url:baseUrl2,

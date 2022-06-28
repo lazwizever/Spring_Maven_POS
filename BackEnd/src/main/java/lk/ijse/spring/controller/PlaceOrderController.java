@@ -43,7 +43,7 @@ public class PlaceOrderController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil saveOrder(@ModelAttribute OrderDTO orderDTO){
+    public ResponseUtil saveOrder(@RequestBody OrderDTO orderDTO){
         placeOrderService.saveOrder(orderDTO);
         return new ResponseUtil(200,"OK",null);
     }

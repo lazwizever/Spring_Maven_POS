@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Item {
     private double unitPrice;
     private int inputQTY;
 
-    @ManyToMany(mappedBy = "orderItemList")
-    List<Item> itemList = new ArrayList<>();
+    @ManyToMany(mappedBy = "itemList")
+    List<Orders> orderList = new ArrayList<>();
 
 }

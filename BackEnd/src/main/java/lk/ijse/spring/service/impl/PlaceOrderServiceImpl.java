@@ -3,6 +3,7 @@ package lk.ijse.spring.service.impl;
 import lk.ijse.spring.dto.CustomerDTO;
 import lk.ijse.spring.dto.ItemDTO;
 import lk.ijse.spring.dto.OrderDTO;
+import lk.ijse.spring.dto.OrderDetailsDTO;
 import lk.ijse.spring.entity.Customer;
 import lk.ijse.spring.entity.Item;
 import lk.ijse.spring.entity.Orders;
@@ -71,8 +72,19 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
 
     @Override
     public void saveOrder(OrderDTO orderDTO) {
+
+        List<Item> itemList = new ArrayList<>();
+
+        for (OrderDetailsDTO temp : orderDTO.getItemList()) {
+            itemList.add(itemRepo.findById(temp.getItemCode()).get());
+        }
+
+        Orders orders = new Orders(orderDTO.getOrderId(),orderDTO.getCusId(),orderDTO.getOrderDate(),
+                orderDTO.getTotal(),customerRepo.findById(orderDTO.getCusId()).get(),itemList);
+
+
         if (!orderRepo.existsById(orderDTO.getOrderId())){
-            orderRepo.save(modelMapper.map(orderDTO, Orders.class));
+            orderRepo.save(orders);
         }else {
             throw new RuntimeException("Order already exist");
         }

@@ -26,7 +26,8 @@ public class Orders {
     @ManyToOne
     private Customer customer;
 
+
     @ManyToMany
     private
-    List<Orders> orderItemList = new ArrayList<>();
+    List<Item> itemList = new ArrayList<>();
 }
