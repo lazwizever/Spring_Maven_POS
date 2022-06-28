@@ -6,9 +6,11 @@ import lk.ijse.spring.dto.OrderDTO;
 import lk.ijse.spring.dto.OrderDetailsDTO;
 import lk.ijse.spring.entity.Customer;
 import lk.ijse.spring.entity.Item;
+import lk.ijse.spring.entity.OrderDetail;
 import lk.ijse.spring.entity.Orders;
 import lk.ijse.spring.repo.CustomerRepo;
 import lk.ijse.spring.repo.ItemRepo;
+import lk.ijse.spring.repo.OrderDetailRepo;
 import lk.ijse.spring.repo.OrderRepo;
 import lk.ijse.spring.service.PlaceOrderService;
 import org.modelmapper.ModelMapper;
@@ -33,6 +35,9 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
 
     @Autowired
     OrderRepo orderRepo;
+
+    @Autowired
+    OrderDetailRepo orderDetailRepo;
 
 
     @Autowired
@@ -73,18 +78,27 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
     @Override
     public void saveOrder(OrderDTO orderDTO) {
 
-        List<Item> itemList = new ArrayList<>();
+        ArrayList<OrderDetailsDTO> itemList = orderDTO.getItemList();
+        List<OrderDetail> orderList = modelMapper.map(itemList, new TypeToken<List<OrderDetail>>(){}.getType());
 
-        for (OrderDetailsDTO temp : orderDTO.getItemList()) {
-            itemList.add(itemRepo.findById(temp.getItemCode()).get());
-        }
 
         Orders orders = new Orders(orderDTO.getOrderId(),orderDTO.getCusId(),orderDTO.getOrderDate(),
-                orderDTO.getTotal(),customerRepo.findById(orderDTO.getCusId()).get(),itemList);
+                orderDTO.getTotal(),customerRepo.findById(orderDTO.getCusId()).get(),orderList);
 
+        //Orders map = modelMapper.map(orderDTO, Orders.class);
 
         if (!orderRepo.existsById(orderDTO.getOrderId())){
             orderRepo.save(orders);
+            for (OrderDetail temp : orderList) {
+                System.out.println(temp.getItem().getItemId());
+                orderDetailRepo.save(temp);
+
+                //Item item = temp.getItem();
+               // item.setInputQTY(item.getInputQTY() - temp.getOrderQty());
+                //itemRepo.save(item);
+
+            }
+
         }else {
             throw new RuntimeException("Order already exist");
         }

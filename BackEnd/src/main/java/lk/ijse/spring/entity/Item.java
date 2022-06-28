@@ -24,7 +24,7 @@ public class Item {
     private double unitPrice;
     private int inputQTY;
 
-    @ManyToMany(mappedBy = "itemList")
-    List<Orders> orderList = new ArrayList<>();
+    @OneToMany(mappedBy = "item")
+    private List<OrderDetail>orderList=new ArrayList();
 
 }

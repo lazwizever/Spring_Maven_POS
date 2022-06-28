@@ -19,4 +19,5 @@ public class OrderDTO {
     private String orderDate;
     private double total;
     private ArrayList<OrderDetailsDTO> itemList;
+
 }
