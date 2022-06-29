@@ -72,8 +72,7 @@ var ordersDetailsArray = [];
             orderQty:itemDetailsArray[i].getOrderCustomerQTY(),
             total:itemDetailsArray[i].getItemTotal()
         }
-
-        ordersDetailsArray[i] = itemDetails;
+        ordersDetailsArray.push(itemDetails);
 
     }
 
@@ -84,7 +83,6 @@ var ordersDetailsArray = [];
         total:$("#netAmount").val(),
         itemList:ordersDetailsArray
     }
-
 
     $.ajax({
         url:baseUrl2,

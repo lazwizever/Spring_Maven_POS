@@ -78,18 +78,21 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
     @Override
     public void saveOrder(OrderDTO orderDTO) {
 
-        ArrayList<OrderDetailsDTO> itemList = orderDTO.getItemList();
-        List<OrderDetail> orderList = modelMapper.map(itemList, new TypeToken<List<OrderDetail>>(){}.getType());
+       //modelMapper.map(orderDTO.getItemList(), new TypeToken<List<OrderDetail>>(){}.getType());
+
+        Orders od = modelMapper.map(orderDTO, Orders.class);
+        System.out.println(od.getItemList().size());
 
 
         Orders orders = new Orders(orderDTO.getOrderId(),orderDTO.getCusId(),orderDTO.getOrderDate(),
-                orderDTO.getTotal(),customerRepo.findById(orderDTO.getCusId()).get(),orderList);
+                orderDTO.getTotal(),customerRepo.findById(orderDTO.getCusId()).get(),od.getItemList());
 
-        //Orders map = modelMapper.map(orderDTO, Orders.class);
 
         if (!orderRepo.existsById(orderDTO.getOrderId())){
             orderRepo.save(orders);
-            for (OrderDetail temp : orderList) {
+
+            for (OrderDetail temp : od.getItemList()) {
+                
                 System.out.println(temp.getItem().getItemId());
                 orderDetailRepo.save(temp);
 

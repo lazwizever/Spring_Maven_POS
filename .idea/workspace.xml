@@ -10,13 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="452297a5-bf7b-4784-a013-2fdfc65c7a3f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/79a9f39f-053c-4e6e-80ed-7003fdadc4c9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/79a9f39f-053c-4e6e-80ed-7003fdadc4c9.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/spring/dto/OrderDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/spring/dto/OrderDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/spring/entity/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/spring/entity/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/spring/entity/OrderDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/spring/entity/OrderDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/spring/entity/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/spring/entity/Orders.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/spring/service/impl/PlaceOrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/spring/service/impl/PlaceOrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/controller/PlaceOrderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/controller/PlaceOrderController.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +44,10 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.19316688" />
+    <property name="project.structure.side.proportion" value="0.3882545" />
+    <property name="settings.editor.selected.configurable" value="preferences.applicationServers" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -56,17 +55,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Tomcat 8.5.78" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.78" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/BackEnd_war/" />
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -171,7 +159,10 @@
       <workItem from="1656335925647" duration="11412000" />
       <workItem from="1656400567894" duration="11021000" />
       <workItem from="1656420517224" duration="8392000" />
-      <workItem from="1656436366531" duration="7495000" />
+      <workItem from="1656436366531" duration="8091000" />
+      <workItem from="1656492792581" duration="727000" />
+      <workItem from="1656497143582" duration="7354000" />
+      <workItem from="1656507521180" duration="3214000" />
     </task>
     <task id="LOCAL-00001" summary="'Complete customer and item CRUD operation'">
       <created>1656327936881</created>
@@ -197,5 +188,9 @@
     <MESSAGE value="'Complete customer and item CRUD operation'" />
     <MESSAGE value="'Updated'" />
     <option name="LAST_COMMIT_MESSAGE" value="'Updated'" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
