@@ -80,27 +80,37 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
 
        //modelMapper.map(orderDTO.getItemList(), new TypeToken<List<OrderDetail>>(){}.getType());
 
-        Orders od = modelMapper.map(orderDTO, Orders.class);
-        System.out.println(od.getItemList().size());
+        List<OrderDetail> odList = new ArrayList<>();
+
+        if (!orderRepo.existsById(orderDTO.getOrderId())){
 
 
         Orders orders = new Orders(orderDTO.getOrderId(),orderDTO.getCusId(),orderDTO.getOrderDate(),
-                orderDTO.getTotal(),customerRepo.findById(orderDTO.getCusId()).get(),od.getItemList());
+                orderDTO.getTotal(),customerRepo.findById(orderDTO.getCusId()).get());
+                orderRepo.save(orders);
 
 
-        if (!orderRepo.existsById(orderDTO.getOrderId())){
-            orderRepo.save(orders);
+        for (OrderDetailsDTO t : orderDTO.getItemList()) {
 
-            for (OrderDetail temp : od.getItemList()) {
-                
+            OrderDetail orderDetail = new OrderDetail(
+                    t.getOrderQty(),t.getTotal(),orders,itemRepo.findById(t.getItemCode()).get()
+            );
+            odList.add(orderDetail);
+
+        }
+
+            for (OrderDetail temp : odList) {
                 System.out.println(temp.getItem().getItemId());
                 orderDetailRepo.save(temp);
 
-                //Item item = temp.getItem();
-               // item.setInputQTY(item.getInputQTY() - temp.getOrderQty());
-                //itemRepo.save(item);
+                Item item = temp.getItem();
+                item.setInputQTY(item.getInputQTY() - temp.getOrderQty());
+                itemRepo.save(item);
 
             }
+
+            orders.setItemList(odList);
+            orderRepo.save(orders);
 
         }else {
             throw new RuntimeException("Order already exist");

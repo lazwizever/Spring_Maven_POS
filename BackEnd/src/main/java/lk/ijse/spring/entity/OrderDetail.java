@@ -22,8 +22,16 @@ public class OrderDetail {
 
     @ManyToOne
     private Orders order;
+
     @ManyToOne
     private Item item;
+
+    public OrderDetail(int orderQty, double total, Orders order, Item item) {
+        this.orderQty = orderQty;
+        this.total = total;
+        this.order = order;
+        this.item = item;
+    }
 
 
 }
