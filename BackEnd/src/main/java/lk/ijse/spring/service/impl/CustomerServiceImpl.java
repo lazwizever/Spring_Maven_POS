@@ -53,8 +53,6 @@ public class CustomerServiceImpl implements CustomerService {
         }else {
             throw new RuntimeException("No customer for "+id+"..!");
         }
-
-
     }
 
     @Override

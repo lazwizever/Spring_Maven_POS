@@ -118,4 +118,26 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
 
     }
 
+    @Override
+    public OrderDTO searchOrder(String id) {
+        if (orderRepo.existsById(id)){
+            Orders orders = orderRepo.findById(id).get();
+            List<OrderDetail> orderItemList = orderDetailRepo.findByOrder(orders);
+
+            ArrayList<OrderDetailsDTO> list = new ArrayList<>();
+
+            for (OrderDetail temp : orderItemList) {
+                list.add(new OrderDetailsDTO(temp.getOrder().getOrderId(),temp.getItem().getItemId(),temp.getOrderQty(),temp.getTotal()));
+
+            }
+
+            OrderDTO od = modelMapper.map(orders, OrderDTO.class);
+            od.setItemList(list);
+            return od;
+        }else {
+            throw new RuntimeException("No order for "+id+"..!");
+        }
+    }
+
+
 }

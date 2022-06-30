@@ -48,7 +48,14 @@ public class PlaceOrderController {
         return new ResponseUtil(200,"OK",null);
     }
 
+    @GetMapping(params = {"orderId"},produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil searchOrder(@RequestParam String orderId){
+        OrderDTO orderDTO = placeOrderService.searchOrder(orderId);
 
+        System.out.println(orderDTO.getItemList().isEmpty());
+        return new ResponseUtil(200,"OK",orderDTO);
+
+    }
 
 
 }

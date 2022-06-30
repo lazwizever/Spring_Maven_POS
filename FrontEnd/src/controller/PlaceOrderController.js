@@ -144,44 +144,52 @@ $("#cmbItemIds").on("change",function(){
 });
 
 function searchOrder() {
-    // let id = $("#txtSearchOrder").val();
-    //
-    // $.ajax({
-    //     url: "http://localhost:8080/backend/order?option=searchOrder&id=" + id,
-    //     method: "GET",
-    //     success: function (resp) {
-    //         $("#oDate").val(resp.orderDate);
-    //         $("#netAmount").val(resp.netTotal);
-    //         $("#grossAmount").val(resp.total);
-    //         $("#customerId").val(resp.customerId);
-    //         $("#customerId").trigger("change");
-    //
-    //         let i = 0;
-    //         console.log(resp.items)
-    //         for (let orderItem of resp.items) {
-    //
-    //             $.ajax({
-    //                 url: "http://localhost:8080/backend/order?option=getItem&id=" + orderItem.itemCode,
-    //                 method: "GET",
-    //                 success: function (response) {
-    //                     i++;
-    //                     let total = parseFloat(response.unitPrice) * parseInt(orderItem.cusQty);
-    //                     itemDetailsArray.push(new ItemDetails(orderItem.itemCode,orderItem.orderId, response.description, orderItem.cusQty, orderItem.unitPrice, total))
-    //
-    //                     if (resp.items.length == i) {
-    //                         loadTable();
-    //                     }
-    //                 },
-    //                 error: function (ob, statusText, error) {
-    //                 }
-    //             });
-    //
-    //         }
-    //     },
-    //     error: function (ob, statusText, error) {
-    //         alert("There is no Order with this Id");
-    //     }
-    // });
+    let id = $("#txtSearchOrder").val();
+
+    $.ajax({
+        url: baseUrl2 + "?orderId=" + id,
+        method: "GET",
+        success: function (resp) {
+            $("#oDate").val(resp.data.orderDate);
+            $("#netAmount").val(resp.data.netTotal);
+            $("#grossAmount").val(resp.data.total);
+            $("#customerId").val(resp.data.cusId);
+            $("#customerId").trigger("change");
+
+
+            let itemArray = resp.data.itemList;
+            console.log(itemArray);
+            for (let i = 0; i < itemArray.length; i++) {
+                $.ajax({
+                    url: baseUrl2 + "?id=" + itemArray[i].itemCode,
+                    method: "GET",
+                    success: function (response) {
+                       /* $("#itemId").val(orderItem.itemCode);
+                        $("#description").val(response.data.description);
+                        $("#unitPrices").val(response.data.unitPrice);
+                        $("#qTY").val(response.data.inputQTY);*/
+
+                        let item = response.data;
+
+                        let total = item.unitPrice * itemArray[i].orderQty;
+                       itemDetailsArray[i] =  new ItemDetails(itemArray[i].itemCode,itemArray[i].orderId,item.description,itemArray[i].orderQty,total);
+
+
+
+                    },
+                    error:function (ob){
+                        console.log(ob);
+                        alert(ob.responseJSON.message);
+                    }
+                });
+            }
+
+            loadTable();
+        },
+        error: function (ob, statusText, error) {
+            alert("There is no Order with this Id");
+        }
+    });
 }
 
 

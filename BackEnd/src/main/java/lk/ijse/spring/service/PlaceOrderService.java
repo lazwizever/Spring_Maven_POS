@@ -16,4 +16,6 @@ public interface PlaceOrderService {
     List<String> getAllItemIds();
 
     void saveOrder(OrderDTO orderDTO);
+
+    OrderDTO searchOrder(String id);
 }
